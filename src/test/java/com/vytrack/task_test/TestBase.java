@@ -3,6 +3,8 @@ package com.vytrack.task_test;
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
+import com.vytrack.pages.CalenderEventsPage;
+import com.vytrack.pages.LoginPage;
 import com.vytrack.utilities.BrowserUtils;
 import com.vytrack.utilities.ConfigurationReader;
 import com.vytrack.utilities.Driver;
@@ -24,6 +26,9 @@ public class TestBase {
     protected Actions actions;
     protected WebDriverWait wait;
 
+    protected LoginPage loginPage;
+    protected CalenderEventsPage calenderEventsPage;
+
     //this class is used for starting and building reports
     public ExtentReports report; //problem olursa static ekle
     // protected static ExtentReports report;
@@ -38,6 +43,7 @@ public class TestBase {
 
     @BeforeTest
     public void setUpTest(){
+
 
         //initialize the class
         report = new ExtentReports();
@@ -80,6 +86,8 @@ public class TestBase {
 
         //  Driver.get().get(ConfigurationReader.get("url")); ==> bu da olurdu
 
+        loginPage = new LoginPage();
+        calenderEventsPage = new CalenderEventsPage();
 
     }
 

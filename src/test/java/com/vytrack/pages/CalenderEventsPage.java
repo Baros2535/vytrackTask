@@ -25,8 +25,11 @@ public class CalenderEventsPage extends BasePage {
     @FindBy(xpath = "//label[contains(text(),'Total of')]")
     public WebElement numberOfRecordsOfEvents;
 
-    @FindBy(xpath = "(//button[@class='btn btn-default btn-small dropdown-toggle'])[3]/input")
+    @FindBy(xpath = "(//div[@class='btn-group dropdown'])[1]//input")
     public WebElement selectAllCheckBox;
+
+    @FindBy(xpath = "//tr/td/input")
+    public List<WebElement> checkBoxes;
 
     @FindBy(css = "i.fa-filter.hide-text")
     public WebElement filterBtn;
@@ -40,18 +43,32 @@ public class CalenderEventsPage extends BasePage {
     @FindBy (css = "table>tbody>tr")
     public List<WebElement> numOfRows;
 
+    @FindBy(xpath = "//span[@class='grid-header-cell__label']")
+    public List<WebElement> testersMeetingTitles;
+
+    @FindBy(xpath = "//tr[@class='grid-row'][4]/td[contains(@class,'-cell grid-cell grid-body-cell grid')]")
+    public List<WebElement> testersMeetingRow;
+
+
 
     public String numberOfRecords(String sendKeys){
 
-       // filterBtn.click();
-        BrowserUtils.waitForClickablility(filterBtn,5).click();
-       // titleBtn.click();
+        filtersWithTitle(sendKeys);
+        BrowserUtils.waitFor(10);
+        return numOfRows.size() + "";
+
+    }
+
+
+    public void filtersWithTitle(String sendKeys){
+
+        // filterBtn.click();
+        BrowserUtils.waitForClickablility(filterBtn,10).click();
+        // titleBtn.click();
         BrowserUtils.waitForClickablility(titleBtn,5).click();
 
         textBox.sendKeys(sendKeys + Keys.ENTER);
         BrowserUtils.waitFor(5);
-
-        return numOfRows.size() + "";
 
     }
 
